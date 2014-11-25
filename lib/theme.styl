@@ -13,14 +13,15 @@ height = 100vh - progress-height - spacing - 2 * slide-padding
 .bespoke-parent
   height: 100vh
   width: 100vw
-  margin: 0 auto;
+  margin: 0 auto
   text-size-adjust: auto
-  overflow:hidden;
+  overflow: hidden
   font-size: fontsize
   position: relative
 
   background-color: #004883
-  background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
     linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
     linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
     linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%)
@@ -54,10 +55,8 @@ height = 100vh - progress-height - spacing - 2 * slide-padding
   justify-content: center
   text-align: left
   align-items: center
-  //transition: all 1s
   transition: background-color 1s, max-height 1s, min-height 1s, min-width 1s
-
-  background-color: rgba(255,255,255,0.8)
+  background-color: rgba(255,255,255,0.9)
 
 .bespoke-slide > *, .bespoke-slide li
   margin-top: 0.5 * fontsize
