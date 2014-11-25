@@ -4,21 +4,17 @@ var bespoke = require('bespoke'),
   keys = require('bespoke-keys'),
   touch = require('bespoke-touch'),
   bullets = require('bespoke-bullets'),
-  scale = require('bespoke-scale'),
-  progress = require('bespoke-progress'),
-  backdrop = require('bespoke-backdrop');
+  progress = require('bespoke-progress');
 
 bespoke.from('article', [
   terminal(),
   keys(),
   touch(),
   bullets('li, .bullet'),
-//  scale(),
-  progress(),
-  backdrop()
+  progress()
 ]);
 
-},{"../../../lib/bespoke-theme-terminal.js":2,"bespoke":10,"bespoke-backdrop":3,"bespoke-bullets":4,"bespoke-keys":6,"bespoke-progress":7,"bespoke-scale":8,"bespoke-touch":9}],2:[function(require,module,exports){
+},{"../../../lib/bespoke-theme-terminal.js":2,"bespoke":8,"bespoke-bullets":3,"bespoke-keys":5,"bespoke-progress":6,"bespoke-touch":7}],2:[function(require,module,exports){
 
 var classes = require('bespoke-classes');
 var insertCss = require('insert-css');
@@ -39,60 +35,7 @@ module.exports = function() {
     };
 };
 
-},{"bespoke-classes":5,"insert-css":11}],3:[function(require,module,exports){
-module.exports = function() {
-  return function(deck) {
-    var backdrops;
-
-    function createBackdropForSlide(slide) {
-      var backdropAttribute = slide.getAttribute('data-bespoke-backdrop');
-
-      if (backdropAttribute) {
-        var backdrop = document.createElement('div');
-        backdrop.className = backdropAttribute;
-        backdrop.classList.add('bespoke-backdrop');
-        deck.parent.appendChild(backdrop);
-        return backdrop;
-      }
-    }
-
-    function updateClasses(el) {
-      if (el) {
-        var index = backdrops.indexOf(el),
-          currentIndex = deck.slide();
-
-        removeClass(el, 'active');
-        removeClass(el, 'inactive');
-        removeClass(el, 'before');
-        removeClass(el, 'after');
-
-        if (index !== currentIndex) {
-          addClass(el, 'inactive');
-          addClass(el, index < currentIndex ? 'before' : 'after');
-        } else {
-          addClass(el, 'active');
-        }
-      }
-    }
-
-    function removeClass(el, className) {
-      el.classList.remove('bespoke-backdrop-' + className);
-    }
-
-    function addClass(el, className) {
-      el.classList.add('bespoke-backdrop-' + className);
-    }
-
-    backdrops = deck.slides
-      .map(createBackdropForSlide);
-
-    deck.on('activate', function() {
-      backdrops.forEach(updateClasses);
-    });
-  };
-};
-
-},{}],4:[function(require,module,exports){
+},{"bespoke-classes":4,"insert-css":9}],3:[function(require,module,exports){
 module.exports = function(options) {
   return function(deck) {
     var activeSlideIndex,
@@ -164,7 +107,7 @@ module.exports = function(options) {
   };
 };
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports = function() {
   return function(deck) {
     var addClass = function(el, cls) {
@@ -200,7 +143,7 @@ module.exports = function() {
   };
 };
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports = function(options) {
   return function(deck) {
     var isHorizontal = options !== 'vertical';
@@ -220,7 +163,7 @@ module.exports = function(options) {
   };
 };
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = function(options) {
   return function (deck) {
     var progressParent = document.createElement('div'),
@@ -238,54 +181,7 @@ module.exports = function(options) {
   };
 };
 
-},{}],8:[function(require,module,exports){
-module.exports = function(options) {
-  return function(deck) {
-    var parent = deck.parent,
-      firstSlide = deck.slides[0],
-      slideHeight = firstSlide.offsetHeight,
-      slideWidth = firstSlide.offsetWidth,
-      useZoom = options === 'zoom' || ('zoom' in parent.style && options !== 'transform'),
-
-      wrap = function(element) {
-        var wrapper = document.createElement('div');
-        wrapper.className = 'bespoke-scale-parent';
-        element.parentNode.insertBefore(wrapper, element);
-        wrapper.appendChild(element);
-        return wrapper;
-      },
-
-      elements = useZoom ? deck.slides : deck.slides.map(wrap),
-
-      transformProperty = (function(property) {
-        var prefixes = 'Moz Webkit O ms'.split(' ');
-        return prefixes.reduce(function(currentProperty, prefix) {
-            return prefix + property in parent.style ? prefix + property : currentProperty;
-          }, property.toLowerCase());
-      }('Transform')),
-
-      scale = useZoom ?
-        function(ratio, element) {
-          element.style.zoom = ratio;
-        } :
-        function(ratio, element) {
-          element.style[transformProperty] = 'scale(' + ratio + ')';
-        },
-
-      scaleAll = function() {
-        var xScale = parent.offsetWidth / slideWidth,
-          yScale = parent.offsetHeight / slideHeight;
-
-        elements.forEach(scale.bind(null, Math.min(xScale, yScale)));
-      };
-
-    window.addEventListener('resize', scaleAll);
-    scaleAll();
-  };
-
-};
-
-},{}],9:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = function(options) {
   return function(deck) {
     var axis = options == 'vertical' ? 'Y' : 'X',
@@ -314,7 +210,7 @@ module.exports = function(options) {
   };
 };
 
-},{}],10:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var from = function(selectorOrElement, plugins) {
   var parent = selectorOrElement.nodeType === 1 ? selectorOrElement : document.querySelector(selectorOrElement),
     slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
@@ -392,7 +288,7 @@ module.exports = {
   from: from
 };
 
-},{}],11:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var inserted = {};
 
 module.exports = function (css, options) {
