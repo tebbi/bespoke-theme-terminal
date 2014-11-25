@@ -1,5 +1,3 @@
-[![Build Status](https://secure.travis-ci.org/tebbi/bespoke-theme-terminal.png?branch=master)](https://travis-ci.org/tebbi/bespoke-theme-terminal)
-
 # bespoke-theme-terminal
 
 a terminal-like scrolling theme &mdash; [View demo](http://tebbi.github.io/bespoke-theme-terminal)
@@ -34,18 +32,12 @@ bespoke.from('#presentation', [
 ]);
 ```
 
-## Package managers
+## Package manager
 
 ### npm
 
 ```bash
 $ npm install bespoke-theme-terminal
-```
-
-### Bower
-
-```bash
-$ bower install bespoke-theme-terminal
 ```
 
 ## Credits
